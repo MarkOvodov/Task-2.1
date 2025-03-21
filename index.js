@@ -7,7 +7,7 @@ const search = 'История';
 
 let listOfLanguages = []
 catalog.forEach((elem) => {
-    if (listOfLanguages.includes(elem.language) === false) {
+    if (!listOfLanguages.includes(elem.language)) {
         listOfLanguages.push(elem.language)
     }
 })
@@ -24,12 +24,14 @@ console.log(listOfBooks)
 
 
 let result = []
-catalog.forEach(function (elem) {
-    if (elem.author.includes(search) === true || elem.author.includes(search.toLowerCase()) === true) 
-        result.push(`${elem.author} - ${elem.title}`)
-    else if (elem.title.includes(search) === true || elem.title.includes(search.toLowerCase()) === true)
-        result.push(`${elem.author} - ${elem.title}`)
-})
+catalog.forEach((elem) => {
+    let searchArray = search.split(' ')
+    searchArray.forEach((elemSearch) => {
+        if ((elem.author.toLowerCase().includes(elemSearch.toLowerCase()) ||
+        elem.title.toLowerCase().includes(elemSearch.toLowerCase())) &&
+        !result.includes(`${elem.author} - ${elem.title}`))
+            result.push(`${elem.author} - ${elem.title}`)
+})})
 
-// Функция принимает только название ИЛИ только автора
+// search должен содержать только название ИЛИ только автора
 console.log(result)
