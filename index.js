@@ -33,5 +33,4 @@ catalog.forEach((elem) => {
             result.push(`${elem.author} - ${elem.title}`)
 })})
 
-// search должен содержать только название ИЛИ только автора
 console.log(result)
